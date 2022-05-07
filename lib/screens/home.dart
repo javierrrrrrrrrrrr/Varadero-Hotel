@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:varadero/contantes/contantes.dart';
 import '../Widget/appBar.dart';
 import '../Widget/carta.dart';
 import '../Widget/navbar.dart';
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
         child: Container(
           height: Get.height,
           width: Get.width,
-          color: const Color.fromRGBO(255, 255, 255, 1),
+          color: khomebodycolor,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const CustomAppBar(),

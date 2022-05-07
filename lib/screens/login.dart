@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:varadero/Widget/textfield.dart';
 import 'package:varadero/screens/home.dart';
 import 'package:varadero/screens/registro.dart';
-
-import '../Widget/Textfield.dart';
 import '../Widget/butomAcept.dart';
+import '../contantes/contantes.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,104 +13,147 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: Get.height,
-        width: Get.width,
-        color: const Color.fromRGBO(255, 255, 255, 1),
-        child: Stack(
-          children: [
-            Container(
-              margin: EdgeInsets.only(
-                right: Get.width * 0.1,
-                left: Get.width * 0.1,
-                top: Get.height * 0.05,
-              ),
-              height: Get.height * 0.4,
-              width: Get.width * 0.8,
-              child: Image.asset('assets/foto1.jpg'),
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                  top: Get.height * 0.4,
-                  left: Get.width * 0.05,
-                  right: Get.width * 0.05),
-              height: Get.height * 0.6,
-              width: Get.width,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: Get.height * 0.08,
-                    ),
-                    CampoTexto(
-                        icono: const Icon(Icons.person), hintext: "Usuario"),
-                    SizedBox(
-                      height: Get.height * 0.02,
-                    ),
-                    CampoTexto(
-                      icono: const Icon(Icons.lock_open),
-                      hintext: "Contraseña",
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          activeColor: Colors.blue,
-                          value: true,
-                          onChanged: (value) {},
-                        ),
-                        const Text(
-                          'Recuerdame',
-                          style: TextStyle(
-                              color: Color.fromRGBO(49, 47, 47, 1),
-                              fontSize: 16),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: Get.width * 0.15),
-                          child: const Text(
-                            'Contraseña olvidada?',
-                            style: TextStyle(
-                                color: Color.fromRGBO(80, 134, 193, 1),
-                                fontSize: 16),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 26,
-                    ),
-                    GestureDetector(
-                      child: ButtomAcept(Texto: "Iniciar"),
-                      onTap: () {
-                        Get.to(const HomePage());
-                      },
-                    ),
-                    const SizedBox(
-                      height: 93,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'No tienes cuenta aun',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        GestureDetector(
-                          child: const Text(
-                            '? Registrate',
-                            style: TextStyle(fontSize: 20, color: Colors.blue),
-                          ),
-                          onTap: () {
-                            Get.to(const RegitroPage());
-                          },
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
+        color: khomebodycolor,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: const [
+              LoginPictureHeader(),
+              LoginBody(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class LoginBody extends StatelessWidget {
+  const LoginBody({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: Get.height * 0.6,
+      margin: EdgeInsets.symmetric(
+        horizontal: Get.width * 0.05,
+      ),
+      child: Column(
+        children: [
+          const InputField(
+            icono: Icon(Icons.person),
+            hintext: "Usuario",
+          ),
+          //Falta Arreglar todos los tamanos de la pagina para que se adapte a los dispositivos
+          SizedBox(
+            height: Get.height * 0.02,
+          ),
+          const InputField(
+            icono: Icon(Icons.lock_open),
+            hintext: "Contraseña",
+          ),
+          const RememberMeSection(),
+          const SizedBox(
+            height: 26,
+          ),
+          const LoginButton(),
+          const SizedBox(
+            height: 93,
+          ),
+          const HasAcountSection()
+        ],
+      ),
+    );
+  }
+}
+
+class HasAcountSection extends StatelessWidget {
+  const HasAcountSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          'No tienes cuenta aun',
+          style: TextStyle(fontSize: 20),
+        ),
+        GestureDetector(
+          child: const Text('? Registrate', style: kLoginRegisterText),
+          onTap: () {
+            Get.to(() => const RegisterPage());
+          },
+        )
+      ],
+    );
+  }
+}
+
+class LoginButton extends StatelessWidget {
+  const LoginButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: ButtomAcept(text: "Iniciar"),
+      onTap: () {
+        Get.to(const HomePage());
+      },
+    );
+  }
+}
+
+class RememberMeSection extends StatelessWidget {
+  const RememberMeSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Checkbox(
+          activeColor: Colors.blue,
+          value: true,
+          onChanged: (value) {},
+        ),
+        const Text('Recuerdame', style: kremembermeStyle),
+        Padding(
+          padding: EdgeInsets.only(left: Get.width * 0.15),
+          child: const Text(
+            'Contraseña olvidada?',
+            style:
+                TextStyle(color: Color.fromRGBO(80, 134, 193, 1), fontSize: 16),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class LoginPictureHeader extends StatelessWidget {
+  const LoginPictureHeader({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+        right: Get.width * 0.1,
+        left: Get.width * 0.1,
+        top: Get.height * 0.05,
+      ),
+      height: Get.height * 0.4,
+      width: Get.width * 0.8,
+      child: Image.asset('assets/foto1.jpg'),
     );
   }
 }

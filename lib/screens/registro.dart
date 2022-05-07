@@ -1,84 +1,93 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varadero/Widget/Textfield.dart';
+import 'package:varadero/Widget/textfield.dart';
+import 'package:varadero/contantes/contantes.dart';
 
 import '../Widget/butomAcept.dart';
 
-class RegitroPage extends StatelessWidget {
-  const RegitroPage({Key? key}) : super(key: key);
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: Get.height,
-            width: Get.width,
-            color: const Color.fromRGBO(255, 255, 255, 1),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                left: Get.width * 0.2,
-                right: Get.width * 0.2,
-                top: Get.height * 0.01),
-            height: Get.height * 0.25,
-            width: Get.width * 0.6,
-            child: Image.asset(
-              'assets/foto1.jpg',
-              fit: BoxFit.cover,
+      backgroundColor: khomebodycolor,
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            const _PictureHeaderSection(),
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: Get.width * 0.07,
+              ),
+              height: Get.height * 0.7,
+              width: Get.width * 0.85,
+              child: Column(children: [
+                const InputField(
+                  icono: Icon(Icons.person),
+                  hintext: "Nombre",
+                ),
+                separador(),
+                const InputField(
+                  icono: Icon(Icons.person),
+                  hintext: "Nombre de Usuario",
+                ),
+                separador(),
+                const InputField(
+                  icono: Icon(Icons.person),
+                  hintext: "Contraseña",
+                ),
+                separador(),
+                const InputField(
+                  icono: Icon(Icons.person),
+                  hintext: " Numero de telefono",
+                ),
+                separador(),
+                const InputField(
+                  icono: Icon(Icons.person),
+                  hintext: "Email",
+                ),
+                SizedBox(
+                  height: Get.height * 0.1,
+                ),
+                ButtomAcept(
+                  text: "Comenzar",
+                  height: Get.height * 0.07,
+                  width: Get.width,
+                ),
+              ]),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                left: Get.width * 0.07,
-                right: Get.width * 0.07,
-                top: Get.height * 0.25),
-            height: Get.height * 0.7,
-            width: Get.width * 0.85,
-            child: Column(children: [
-              CampoTexto(
-                icono: const Icon(Icons.person),
-                hintext: "Nombre",
-              ),
-              Separador(),
-              CampoTexto(
-                icono: const Icon(Icons.person),
-                hintext: "Nombre de Usuario",
-              ),
-              Separador(),
-              CampoTexto(
-                icono: const Icon(Icons.person),
-                hintext: "Contraseña",
-              ),
-              Separador(),
-              CampoTexto(
-                icono: const Icon(Icons.person),
-                hintext: " Numero de telefono",
-              ),
-              Separador(),
-              CampoTexto(
-                icono: const Icon(Icons.person),
-                hintext: "Email",
-              ),
-              SizedBox(
-                height: Get.height * 0.1,
-              ),
-              ButtomAcept(
-                Texto: "Comenzar",
-                Altura: Get.height * 0.07,
-                Ancho: Get.width,
-              ),
-            ]),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  SizedBox Separador() {
+  SizedBox separador() {
     return SizedBox(
       height: Get.height * 0.025,
+    );
+  }
+}
+
+class _PictureHeaderSection extends StatelessWidget {
+  const _PictureHeaderSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: Get.width * 0.2,
+      ),
+      height: Get.height * 0.25,
+      width: Get.width * 0.6,
+      child: Image.asset(
+        'assets/foto1.jpg',
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
