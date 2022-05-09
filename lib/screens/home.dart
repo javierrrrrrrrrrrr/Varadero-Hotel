@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varadero/contantes/contantes.dart';
+import 'package:varadero/screens/hotel_home.dart';
 import '../Widget/appBar.dart';
 import '../Widget/carta.dart';
 import '../Widget/navbar.dart';
@@ -47,7 +48,7 @@ class HomePage extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   itemCount: 5,
                   itemBuilder: (BuildContext context, index) {
-                    return const Carta();
+                    return Carta();
                   },
                 ),
               ),

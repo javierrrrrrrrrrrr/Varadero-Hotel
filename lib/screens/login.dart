@@ -86,7 +86,7 @@ class HasAcountSection extends StatelessWidget {
         GestureDetector(
           child: const Text('? Registrate', style: kLoginRegisterText),
           onTap: () {
-            Get.to(() => const RegisterPage());
+            Get.toNamed('/register');
           },
         )
       ],
@@ -102,7 +102,7 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: ButtomAcept(text: "Iniciar"),
+      child: const ButtomAcept(text: "Iniciar"),
       onTap: () {
         Get.to(const HomePage());
       },
