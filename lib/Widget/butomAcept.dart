@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:varadero/contantes/contantes.dart';
 
 class ButtomAcept extends StatelessWidget {
-  ButtomAcept({Key? key, required this.Texto, this.Altura, this.Ancho})
-      : super(key: key);
+  const ButtomAcept({
+    Key? key,
+    required this.text,
+    this.height,
+    this.width,
+  }) : super(key: key);
 
-  String Texto;
-  double? Altura;
-  double? Ancho;
+  final String text;
+  final double? height;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Altura ?? Get.height * 0.05,
-      width: Ancho ?? Get.width,
+      height: height ?? Get.height * 0.05,
+      width: width ?? Get.width,
       decoration: BoxDecoration(
-          color: const Color.fromRGBO(80, 134, 193, 1),
-          borderRadius: BorderRadius.circular(4)),
+          color: kbuttonAcceptBgColor, borderRadius: BorderRadius.circular(4)),
       child: Center(
         child: Text(
-          Texto,
+          text,
           style: const TextStyle(
-              color: Color.fromRGBO(255, 255, 255, 1), fontSize: 20),
+            color: kbuttonAcceptTextColor,
+            fontSize: 20,
+          ),
         ),
       ),
     );
