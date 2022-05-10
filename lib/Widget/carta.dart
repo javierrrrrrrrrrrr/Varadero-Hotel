@@ -44,7 +44,10 @@ class Carta extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
-                        RaitingBar(),
+                        RaitingBar(
+                          tamano: 19,
+                          separacion: 0,
+                        ),
                         /**  uso es simbolo para lograr que reconozca el simbolo de peso como un caracter */
                         Text(
                           '  \$ 4000 Cup',
