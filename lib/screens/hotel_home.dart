@@ -40,7 +40,7 @@ class HotelHomePage extends StatelessWidget {
                       bottom: 0,
                       left: 12,
                       child: SizedBox(
-                        height: 80,
+                        height: 65,
                         width: 150,
                         //  color: Colors.red,
                         child: Center(
@@ -125,7 +125,7 @@ class HotelHomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const Navbar(),
+      // bottomNavigationBar: const Navbar(),
     );
   }
 
