@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varadero/Widget/likeButtom.dart';
 
+import '../Widget/TextoCamp.dart';
 import '../Widget/navbar.dart';
 import '../Widget/raitingBar.dart';
 import '../contantes/contantes.dart';
@@ -191,25 +192,6 @@ class HotelHomePage extends StatelessWidget {
   SizedBox Separador(double x) {
     return SizedBox(
       height: Get.height * x,
-    );
-  }
-}
-
-class Textos extends StatelessWidget {
-  const Textos({
-    Key? key,
-    required this.texto,
-    required this.tamano,
-  }) : super(key: key);
-
-  final String texto;
-  final double tamano;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      texto,
-      style: TextStyle(fontSize: tamano),
     );
   }
 }
