@@ -1,158 +1,131 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varadero/Widget/TextoCamp.dart';
+import 'package:varadero/screens/menu_paquetes.dart';
 
-class ComprarPaquetesPage extends StatelessWidget {
-  const ComprarPaquetesPage({Key? key}) : super(key: key);
+class ComprarPaquetes extends StatelessWidget {
+  const ComprarPaquetes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<CartaPaquetes> li = [];
+    li.add(const CartaPaquetes(
+      detalles: 'Ver servicios',
+      paquete: 'Servicios sencillos',
+      precio: 'Compra los servicios que desees',
+      icono: '',
+    ));
+    li.add(const CartaPaquetes(
+      detalles: 'Ver servicios del paquete',
+      paquete: 'Paquete de Plata',
+      precio: '\$ 200 al mes',
+      icono: 'assets/plata.png',
+    ));
+    li.add(const CartaPaquetes(
+      detalles: 'Ver servicios del paquete',
+      paquete: 'Paquete de Oro ',
+      precio: '\$ 300 al mes',
+      icono: 'assets/oro.png',
+    ));
+    li.add(const CartaPaquetes(
+      detalles: 'Ver servicios del paquete',
+      paquete: 'Paquete de Diamante ',
+      precio: '\$ 500 al mes',
+      icono: 'assets/diamante.png',
+    ));
+
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: EdgeInsets.only(
-                  left: Get.width * 0.05, top: Get.height * 0.03),
-              height: Get.height * 0.2,
-              width: Get.width * 0.9,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: Get.height * 0.03),
-                    child: const CircleAvatar(
-                      radius: 40,
-                    ),
-                  ),
-                  Separador(tamano: 6),
-                  const Textos(
-                    color: Color.fromRGBO(80, 134, 193, 1),
-                    texto: 'Hola Maria',
-                    tamano: 28,
-                  ),
-                  Separador(tamano: 6),
-                  const Textos(
-                    texto: 'Aqui puedes encontrar los ajustes de tu cuenta',
-                    tamano: 16,
-                  ),
-                ],
-              ),
+        child: Column(children: [
+          Separador(tamano: Get.height * 0.02),
+          const CircleAvatar(
+            maxRadius: 50,
+          ),
+          Separador(tamano: Get.height * 0.02),
+          const Textos(
+              texto: 'Paquetes disponibles',
+              tamano: 25,
+              color: Color.fromRGBO(80, 134, 193, 1)),
+          Separador(tamano: Get.height * 0.05),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: 4,
+              itemBuilder: (BuildContext context, index) {
+                return li[index];
+              },
             ),
-            Row(
-              children: [
-                CajonCuadrado(
-                  foto: 'assets/caja1.png',
-                  fontSize: 18,
-                  texto: 'Comprar nuevo paquete',
-                  color: const Color.fromRGBO(77, 152, 168, 0.45),
-                ),
-                CajonCuadrado(
-                  foto: 'assets/caja2.png',
-                  fontSize: 18,
-                  texto: 'Consultar  paquetes activos',
-                  color: const Color.fromRGBO(107, 51, 51, 0.45),
-                ),
-              ],
-            ),
-            Separador(tamano: Get.height * 0.05),
-            Row(
-              children: [
-                CajonCuadrado(
-                  foto: 'assets/tuerca.png',
-                  fontSize: 18,
-                  texto: 'Ajustes de mi cuenta',
-                  color: const Color.fromRGBO(255, 230, 0, 0.45),
-                ),
-                CajonCuadrado(
-                  foto: 'assets/corazon.png',
-                  fontSize: 18,
-                  texto: 'Favoritos',
-                  color: const Color.fromRGBO(255, 2, 2, 0.45),
-                ),
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.only(top: Get.height * 0.03, left: 50),
-              height: Get.height * 0.1,
-              width: Get.width * 0.8,
-              child: const Center(
-                child: Text(
-                  'A la compra de los servicios por paquete se les realiza una rebaja del 10%, a los servicios solos no se les hace rebaja',
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: Color.fromRGBO(87, 85, 85, 1),
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
+          ),
+        ]),
       ),
     );
   }
 }
 
-class Separador extends StatelessWidget {
-  Separador({
+class CartaPaquetes extends StatelessWidget {
+  const CartaPaquetes({
     Key? key,
-    required this.tamano,
+    required this.paquete,
+    required this.precio,
+    required this.detalles,
+    this.icono,
   }) : super(key: key);
 
-  double tamano;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(height: tamano);
-  }
-}
+  final String paquete;
+  final String precio;
+  final String? icono;
+  final String detalles;
 
-class CajonCuadrado extends StatelessWidget {
-  CajonCuadrado({
-    Key? key,
-    required this.color,
-    required this.texto,
-    required this.fontSize,
-    required this.foto,
-  }) : super(key: key);
-  Color color;
-  String texto;
-  String foto;
-  double fontSize;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        left: Get.width * 0.04,
-        right: Get.width * 0.04,
+        bottom: Get.height * 0.03,
+        left: Get.height * 0.02,
+        right: Get.height * 0.02,
       ),
-      height: Get.height * 0.23,
-      width: Get.height * 0.2,
+      height: Get.height * 0.15,
+      width: Get.width * 0.9,
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.2),
+            blurRadius: 4,
+            spreadRadius: 1,
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Stack(
         children: [
-          Positioned(
-            right: 18,
-            top: 15,
-            child: Image.asset(foto),
-          ),
-          Positioned(
-            top: 95,
-            child: SizedBox(
-              width: Get.width * 0.4,
-              child: Text(
-                texto,
-                style: TextStyle(
-                  fontSize: fontSize,
-                  color: const Color.fromRGBO(80, 134, 193, 1),
-                ),
-                textAlign: TextAlign.center,
-              ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Textos(
+                    texto: paquete,
+                    tamano: 22,
+                    color: const Color.fromRGBO(80, 134, 193, 1)),
+                Textos(texto: precio, tamano: 16),
+              ],
             ),
           ),
+          Positioned(
+              top: 10,
+              right: 15,
+              child: icono == '' ? const Text('') : Image.asset(icono!)),
+          Positioned(
+            bottom: 5,
+            right: 15,
+            child: Textos(
+              texto: detalles,
+              tamano: 15,
+              color: const Color.fromRGBO(80, 134, 193, 1),
+            ),
+          )
         ],
       ),
     );

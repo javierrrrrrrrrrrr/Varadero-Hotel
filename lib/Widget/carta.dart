@@ -15,9 +15,9 @@ class Carta extends StatelessWidget {
     return Stack(
       children: [
         GestureDetector(
-          onTap: (() => Get.to(
-                () => const HotelHomePage(),
-              )),
+          onTap: () => Get.to(
+            () => const HotelHomePage(),
+          ),
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
             height: Get.height * 0.3,

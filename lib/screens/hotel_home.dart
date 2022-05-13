@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varadero/Widget/likeButtom.dart';
-
 import '../Widget/TextoCamp.dart';
-import '../Widget/navbar.dart';
 import '../Widget/raitingBar.dart';
 import '../contantes/contantes.dart';
 
@@ -126,7 +124,6 @@ class HotelHomePage extends StatelessWidget {
           ],
         ),
       ),
-      // bottomNavigationBar: const Navbar(),
     );
   }
 
@@ -211,12 +208,6 @@ class _HeaderPaintDiagonal extends CustomPainter {
         size.width * 0.4, size.height * 0.7, size.width * 0.6, size.height);
     path.lineTo(0, size.height);
     path.lineTo(0, size.height * 0.7);
-
-    //  path.lineTo(size.width * 0.4, size.height * 0.5);
-    //  path.lineTo(size.width * 0.7, size.height * 1);
-    //  path.lineTo(0, size.height);
-    //path.lineTo(0, 0);
-
     canvas.drawPath(path, paint);
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:varadero/provaiders/navProvaider.dart';
-import 'package:varadero/screens/comprar_paquetes.dart';
+import 'package:varadero/screens/menu_paquetes.dart';
 
 import '../Widget/navbar.dart';
 import 'home.dart';
@@ -28,7 +28,7 @@ class _HomePageBody extends StatelessWidget {
 
     switch (loginProvaider.index) {
       case 0:
-        return const ComprarPaquetesPage();
+        return const MenuPaquetesPage();
 
       case 1:
         return const HomePage();
