@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:varadero/provaiders/navProvaider.dart';
+import 'package:varadero/provaiders/loginProvaider.dart';
 import 'package:varadero/screens/comprar_paquetes.dart';
 import 'package:varadero/screens/menu_paquetes.dart';
 import 'package:varadero/screens/home.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/principal', page: () => const Principal()),
         GetPage(name: '/buy', page: () => const ComprarPaquetes()),
       ],
-      initialRoute: '/principal',
+      initialRoute: '/login',
     );
   }
 }

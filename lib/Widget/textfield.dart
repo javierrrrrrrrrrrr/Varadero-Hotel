@@ -7,8 +7,10 @@ class InputField extends StatelessWidget {
     Key? key,
     this.icono,
     required this.hintext,
+    required this.onChanged,
   }) : super(key: key);
 
+  final void Function(String)? onChanged;
   final Widget? icono;
   final String hintext;
 
@@ -18,6 +20,7 @@ class InputField extends StatelessWidget {
         BorderRadius.all(Radius.circular(Get.width * 0.02));
 
     return TextField(
+      onChanged: onChanged,
       decoration: InputDecoration(
         prefixIconColor: kcolorInputPrefixIcon,
         prefixIcon: icono,

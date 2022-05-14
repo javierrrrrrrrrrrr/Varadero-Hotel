@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:varadero/Widget/textfield.dart';
 import 'package:varadero/contantes/contantes.dart';
+import 'package:varadero/provaiders/loginProvaider.dart';
 
 import '../Widget/butomAcept.dart';
 
@@ -10,6 +12,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: khomebodycolor,
       body: SingleChildScrollView(
@@ -24,28 +27,43 @@ class RegisterPage extends StatelessWidget {
               height: Get.height * 0.7,
               width: Get.width * 0.85,
               child: Column(children: [
-                const InputField(
-                  icono: Icon(Icons.person),
+                InputField(
+                  onChanged: (value) {
+                    loginProvider.user.name = value;
+                  },
+                  icono: const Icon(Icons.person),
                   hintext: "Nombre",
                 ),
                 separador(),
-                const InputField(
-                  icono: Icon(Icons.person),
+                InputField(
+                  onChanged: (value) {
+                    loginProvider.user.username = value;
+                  },
+                  icono: const Icon(Icons.person),
                   hintext: "Nombre de Usuario",
                 ),
                 separador(),
-                const InputField(
-                  icono: Icon(Icons.person),
+                InputField(
+                  onChanged: (value) {
+                    loginProvider.user.password = value;
+                  },
+                  icono: const Icon(Icons.person),
                   hintext: "Contraseña",
                 ),
                 separador(),
-                const InputField(
-                  icono: Icon(Icons.person),
+                InputField(
+                  onChanged: (value) {
+                    loginProvider.user.phoneNumber = value;
+                  },
+                  icono: const Icon(Icons.person),
                   hintext: " Numero de telefono",
                 ),
                 separador(),
-                const InputField(
-                  icono: Icon(Icons.person),
+                InputField(
+                  onChanged: (value) {
+                    loginProvider.user.email = value;
+                  },
+                  icono: const Icon(Icons.person),
                   hintext: "Email",
                 ),
                 SizedBox(

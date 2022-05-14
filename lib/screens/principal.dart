@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:varadero/provaiders/navProvaider.dart';
+import 'package:varadero/provaiders/loginProvaider.dart';
 import 'package:varadero/screens/menu_paquetes.dart';
 
 import '../Widget/navbar.dart';

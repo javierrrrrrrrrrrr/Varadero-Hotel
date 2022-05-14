@@ -42,16 +42,18 @@ class LoginBody extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const InputField(
-            icono: Icon(Icons.person),
+          InputField(
+            onChanged: (value) {},
+            icono: const Icon(Icons.person),
             hintext: "Usuario",
           ),
           //Falta Arreglar todos los tamanos de la pagina para que se adapte a los dispositivos
           SizedBox(
             height: Get.height * 0.02,
           ),
-          const InputField(
-            icono: Icon(Icons.lock_open),
+          InputField(
+            onChanged: (value) {},
+            icono: const Icon(Icons.lock_open),
             hintext: "Contraseña",
           ),
           const RememberMeSection(),
