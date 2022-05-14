@@ -7,7 +7,7 @@ import 'package:varadero/screens/menu_paquetes.dart';
 import 'package:varadero/screens/home.dart';
 import 'package:varadero/screens/login.dart';
 import 'package:varadero/screens/principal.dart';
-import 'package:varadero/screens/registro.dart';
+import 'package:varadero/screens/user_register.dart';
 
 void main() => runApp(MultiProvider(
       providers: [

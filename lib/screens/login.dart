@@ -43,8 +43,9 @@ class LoginBody extends StatelessWidget {
         children: [
           InputField(
             onChanged: (value) {},
-            icono: const Icon(Icons.person),
+            icon: const Icon(Icons.person),
             hintext: "Usuario",
+            keyboardType: TextInputType.text,
           ),
           //Falta Arreglar todos los tamanos de la pagina para que se adapte a los dispositivos
           SizedBox(
@@ -52,8 +53,9 @@ class LoginBody extends StatelessWidget {
           ),
           InputField(
             onChanged: (value) {},
-            icono: const Icon(Icons.lock_open),
+            icon: const Icon(Icons.lock_open),
             hintext: "Contraseña",
+            keyboardType: TextInputType.text,
           ),
           const RememberMeSection(),
           const SizedBox(
