@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varadero/Widget/textfield.dart';
-import 'package:varadero/screens/home.dart';
-import 'package:varadero/screens/registro.dart';
+import 'package:varadero/screens/principal.dart';
 import '../Widget/butomAcept.dart';
 import '../contantes/contantes.dart';
 
@@ -106,7 +105,7 @@ class LoginButton extends StatelessWidget {
     return GestureDetector(
       child: const ButtomAcept(text: "Iniciar"),
       onTap: () {
-        Get.to(const HomePage());
+        Get.to(const Principal());
       },
     );
   }

@@ -13,3 +13,6 @@ const kLoginRegisterText = TextStyle(fontSize: 20, color: Colors.blue);
 
 //input login Style
 const kBorderSideColor = Color.fromRGBO(0, 0, 0, 0.2);
+
+//IP de la aPi
+const kIpApi = "45.138.49.84:3000";

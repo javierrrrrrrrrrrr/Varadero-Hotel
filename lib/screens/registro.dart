@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:varadero/Widget/textfield.dart';
 import 'package:varadero/contantes/contantes.dart';
+import 'package:varadero/models/users/user.dart';
 import 'package:varadero/provaiders/loginProvaider.dart';
 
 import '../Widget/butomAcept.dart';
@@ -12,6 +13,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final User user = User();
     final loginProvider = Provider.of<LoginProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: khomebodycolor,
@@ -29,7 +31,7 @@ class RegisterPage extends StatelessWidget {
               child: Column(children: [
                 InputField(
                   onChanged: (value) {
-                    loginProvider.user.name = value;
+                    user.name = value;
                   },
                   icono: const Icon(Icons.person),
                   hintext: "Nombre",
@@ -37,7 +39,8 @@ class RegisterPage extends StatelessWidget {
                 separador(),
                 InputField(
                   onChanged: (value) {
-                    loginProvider.user.username = value;
+                    user.username = value;
+                    print(user.username);
                   },
                   icono: const Icon(Icons.person),
                   hintext: "Nombre de Usuario",
@@ -45,7 +48,7 @@ class RegisterPage extends StatelessWidget {
                 separador(),
                 InputField(
                   onChanged: (value) {
-                    loginProvider.user.password = value;
+                    user.password = value;
                   },
                   icono: const Icon(Icons.person),
                   hintext: "Contraseña",
@@ -53,7 +56,7 @@ class RegisterPage extends StatelessWidget {
                 separador(),
                 InputField(
                   onChanged: (value) {
-                    loginProvider.user.phoneNumber = value;
+                    user.phoneNumber = value;
                   },
                   icono: const Icon(Icons.person),
                   hintext: " Numero de telefono",
@@ -61,7 +64,7 @@ class RegisterPage extends StatelessWidget {
                 separador(),
                 InputField(
                   onChanged: (value) {
-                    loginProvider.user.email = value;
+                    user.email = value;
                   },
                   icono: const Icon(Icons.person),
                   hintext: "Email",
@@ -73,6 +76,12 @@ class RegisterPage extends StatelessWidget {
                   text: "Comenzar",
                   height: Get.height * 0.07,
                   width: Get.width,
+                  onPressed: () async {
+                    bool registered = await loginProvider.registerUser(user);
+                    if (registered) {
+                      Get.toNamed('/login');
+                    }
+                  },
                 ),
               ]),
             ),
