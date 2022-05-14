@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:varadero/Widget/TextoCamp.dart';
 import 'package:varadero/screens/menu_paquetes.dart';
 
+import '../Widget/separador.dart';
+
 class ComprarPaquetes extends StatelessWidget {
   const ComprarPaquetes({Key? key}) : super(key: key);
 
