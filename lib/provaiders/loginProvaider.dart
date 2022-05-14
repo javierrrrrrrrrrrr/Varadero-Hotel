@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:varadero/controllers/loginController.dart';
+import 'package:varadero/services/LoginService.dart';
 
 import '../models/users/user.dart';
 
 class LoginProvider extends ChangeNotifier {
   int index = 1;
-  LoginController loginController = LoginController();
+  LoginService loginController = LoginService();
 
   selectOpcion(int i) {
     index = i;

@@ -5,8 +5,8 @@ import 'package:varadero/Widget/raitingBar.dart';
 import '../screens/hotel_home.dart';
 import 'likeButtom.dart';
 
-class Carta extends StatelessWidget {
-  const Carta({
+class HotelCard extends StatelessWidget {
+  const HotelCard({
     Key? key,
   }) : super(key: key);
 

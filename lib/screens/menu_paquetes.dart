@@ -44,6 +44,7 @@ class MenuPaquetesPage extends StatelessWidget {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CajonCuadrado(
                   onPressed: () {
@@ -64,6 +65,7 @@ class MenuPaquetesPage extends StatelessWidget {
             ),
             Separador(tamano: Get.height * 0.05),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
                 CajonCuadrado(
                   foto: 'assets/tuerca.png',

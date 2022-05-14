@@ -19,11 +19,8 @@ class CajonCuadrado extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onPressed,
       child: Container(
-        margin: EdgeInsets.only(
-          left: Get.width * 0.04,
-          right: Get.width * 0.04,
-        ),
         height: Get.height * 0.23,
         width: Get.height * 0.2,
         decoration: BoxDecoration(
@@ -54,7 +51,6 @@ class CajonCuadrado extends StatelessWidget {
           ],
         ),
       ),
-      onTap: onPressed,
     );
   }
 }

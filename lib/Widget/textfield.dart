@@ -5,25 +5,31 @@ import 'package:varadero/contantes/contantes.dart';
 class InputField extends StatelessWidget {
   const InputField({
     Key? key,
-    this.icono,
+    this.icon,
     required this.hintext,
     required this.onChanged,
+    this.validator,
+    required this.keyboardType,
   }) : super(key: key);
 
   final void Function(String)? onChanged;
-  final Widget? icono;
+  final Widget? icon;
   final String hintext;
+  final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
     BorderRadius _borderRadius =
         BorderRadius.all(Radius.circular(Get.width * 0.02));
 
-    return TextField(
+    return TextFormField(
+      keyboardType: keyboardType,
+      validator: validator,
       onChanged: onChanged,
       decoration: InputDecoration(
         prefixIconColor: kcolorInputPrefixIcon,
-        prefixIcon: icono,
+        prefixIcon: icon,
         hintText: hintext,
         border: OutlineInputBorder(
           borderRadius: _borderRadius,

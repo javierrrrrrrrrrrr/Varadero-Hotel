@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:varadero/contantes/contantes.dart';
 import 'package:varadero/models/users/user.dart';
 
-class LoginController extends GetConnect {
+class LoginService extends GetConnect {
   //Register User
   Future<Response> registerUser(User user) {
     return post('http://$kIpApi/api/signup', {
