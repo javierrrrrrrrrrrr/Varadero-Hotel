@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:varadero/provaiders/loginProvaider.dart';
+import 'package:get/get.dart';
+import 'package:varadero/controllers/pricipal_controller.dart';
 import 'package:varadero/screens/menu_paquetes.dart';
 
 import '../Widget/navbar.dart';
@@ -24,20 +24,22 @@ class _HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginProvaider = Provider.of<LoginProvider>(context);
+    // final loginProvaider = Provider.of<LoginProvider>(context);
+    final pricipalController = Get.put(PrincipalController());
+    return Obx(() {
+      switch (pricipalController.index.value) {
+        case 0:
+          return const MenuPaquetesPage();
 
-    switch (loginProvaider.index) {
-      case 0:
-        return const MenuPaquetesPage();
+        case 1:
+          return const HomePage();
 
-      case 1:
-        return const HomePage();
+        case 2:
+          return const HotelHomePage();
 
-      case 2:
-        return const HotelHomePage();
-
-      default:
-        return const HomePage();
-    }
+        default:
+          return const HomePage();
+      }
+    });
   }
 }

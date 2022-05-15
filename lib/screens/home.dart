@@ -3,7 +3,7 @@ import 'package:varadero/Widget/hotel_card.dart';
 import 'package:varadero/contantes/contantes.dart';
 import '../Widget/appBar.dart';
 
-import '../Widget/ovalo.dart';
+import '../Widget/custom_pill.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,39 +24,42 @@ class HomePage extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: [
-                      Ovalo(
-                        texto: 'Precio',
-                        ancho: 60,
-                      ),
-                      Ovalo(texto: 'Estrellas', ancho: 75),
-                      Ovalo(texto: 'Cantidad de dias', ancho: 120),
-                      Ovalo(
-                        texto: 'Otros',
-                        ancho: 50,
-                      ),
+                    children: const [
+                      CustomPill(label: 'Precio', width: 60),
+                      CustomPill(label: 'Estrellas', width: 75),
+                      CustomPill(label: 'Cantidad de dias', width: 120),
+                      CustomPill(label: 'Otros', width: 50),
                     ],
                   ),
                 ),
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 12,
-              child: SizedBox(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, index) {
-                    return const HotelCard();
-                  },
-                ),
-              ),
+              child: HotelCardList(),
             ),
           ],
         ),
       ),
       // bottomNavigationBar: const Navbar(),
+    );
+  }
+}
+
+class HotelCardList extends StatelessWidget {
+  const HotelCardList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemCount: 5,
+      itemBuilder: (BuildContext context, index) {
+        return const HotelCard();
+      },
     );
   }
 }

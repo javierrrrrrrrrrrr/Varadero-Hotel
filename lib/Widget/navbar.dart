@@ -1,8 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../provaiders/loginProvaider.dart';
+import 'package:get/get.dart';
+import 'package:varadero/controllers/pricipal_controller.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({
@@ -11,9 +10,9 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginProvaider = Provider.of<LoginProvider>(context);
+    final principalController = Get.find<PrincipalController>();
     return CurvedNavigationBar(
-      index: loginProvaider.index,
+      index: principalController.index.value,
       height: 50,
       color: const Color.fromRGBO(80, 134, 193, 1),
       //buttonBackgroundColor: Colors.black,
@@ -36,7 +35,7 @@ class Navbar extends StatelessWidget {
         ),
       ],
       onTap: (index) {
-        loginProvaider.selectOpcion(index);
+        principalController.index.value = index;
       },
     );
 

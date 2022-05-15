@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Ovalo extends StatelessWidget {
-  Ovalo({
+class CustomPill extends StatelessWidget {
+  const CustomPill({
     Key? key,
-    required this.texto,
-    required this.ancho,
+    required this.label,
+    required this.width,
   }) : super(key: key);
 
-  String texto;
-  double ancho;
+  final String label;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class Ovalo extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10, left: 20),
       child: Container(
         height: 30,
-        width: ancho,
+        width: width,
         decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: const [
@@ -28,7 +28,7 @@ class Ovalo extends StatelessWidget {
               ),
             ],
             borderRadius: BorderRadius.circular(15)),
-        child: Center(child: Text(texto)),
+        child: Center(child: Text(label)),
       ),
     );
   }

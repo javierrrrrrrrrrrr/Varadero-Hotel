@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varadero/Widget/likeButtom.dart';
-import '../Widget/TextoCamp.dart';
+import '../Widget/custom_text_labels.dart';
 import '../Widget/raitingBar.dart';
 import '../contantes/contantes.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class HotelHomePage extends StatelessWidget {
   const HotelHomePage({Key? key}) : super(key: key);
@@ -43,12 +44,14 @@ class HotelHomePage extends StatelessWidget {
                         width: 150,
                         //  color: Colors.red,
                         child: Center(
-                          child: Text(
-                            'Blau Resort',
+                          child: AutoSizeText(
+                            'Sol Palmeras y Varadero Beach',
                             style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(133, 170, 211, 1)),
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(133, 170, 211, 1),
+                            ),
+                            maxLines: 2,
                           ),
                         ),
                       ),
@@ -82,14 +85,16 @@ class HotelHomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Separador(0.03),
-                  const Textos(texto: "Informacion del Hotel", tamano: 24),
-                  Separador(0.01),
-                  const Textos(texto: "Cadena Hotelera : Blau", tamano: 18),
-                  Separador(0.01),
-                  const Textos(
+                  separador(0.03),
+                  const CustomTextLabels(
+                      texto: "Informacion del Hotel", tamano: 24),
+                  separador(0.01),
+                  const CustomTextLabels(
+                      texto: "Cadena Hotelera : Blau", tamano: 18),
+                  separador(0.01),
+                  const CustomTextLabels(
                       texto: "Direccion : Blau bla bla bla bla", tamano: 18),
-                  Separador(0.02),
+                  separador(0.02),
                   Padding(
                     padding: EdgeInsets.only(left: Get.height * 0.26),
                     child: SizedBox(
@@ -108,16 +113,17 @@ class HotelHomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Separador(0.02),
+                  SizedBox(height: Get.height * 0.02),
                 ],
               ),
             ),
             Expanded(
               child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 itemCount: 5,
                 itemBuilder: (BuildContext context, index) {
-                  return Carta2();
+                  return comentsCards();
                 },
               ),
             ),
@@ -127,7 +133,7 @@ class HotelHomePage extends StatelessWidget {
     );
   }
 
-  Container Carta2() => Container(
+  Container comentsCards() => Container(
         margin: const EdgeInsets.only(
           left: 10,
           right: 10,
@@ -155,14 +161,15 @@ class HotelHomePage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Separador(0.01),
-                            const Textos(texto: 'Maria Fernanda', tamano: 16),
-                            const Textos(
+                            separador(0.01),
+                            const CustomTextLabels(
+                                texto: 'Maria Fernanda', tamano: 16),
+                            const CustomTextLabels(
                               texto: 'Comentario : Blau bla bla bla bla',
                               tamano: 16,
                             ),
-                            Separador(0.01),
-                            const Textos(
+                            separador(0.01),
+                            const CustomTextLabels(
                               tamano: 12,
                               texto: 'Fecha * Hora',
                             )
@@ -186,7 +193,7 @@ class HotelHomePage extends StatelessWidget {
         ),
       );
 
-  SizedBox Separador(double x) {
+  SizedBox separador(double x) {
     return SizedBox(
       height: Get.height * x,
     );
