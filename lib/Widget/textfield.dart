@@ -10,6 +10,7 @@ class InputField extends StatelessWidget {
     required this.onChanged,
     this.validator,
     required this.keyboardType,
+    this.contentPadding,
   }) : super(key: key);
 
   final void Function(String)? onChanged;
@@ -17,17 +18,20 @@ class InputField extends StatelessWidget {
   final String hintext;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
-    BorderRadius _borderRadius =
-        BorderRadius.all(Radius.circular(Get.width * 0.02));
+    BorderRadius _borderRadius = BorderRadius.all(
+      Radius.circular(Get.width * 0.02),
+    );
 
     return TextFormField(
       keyboardType: keyboardType,
       validator: validator,
       onChanged: onChanged,
       decoration: InputDecoration(
+        contentPadding: contentPadding,
         prefixIconColor: kcolorInputPrefixIcon,
         prefixIcon: icon,
         hintText: hintext,
