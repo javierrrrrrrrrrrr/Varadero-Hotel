@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varadero/Widget/TextoCamp.dart';
+import 'package:varadero/Widget/custom_text_labels.dart';
 
 import '../Widget/cajonCuadrado.dart';
 import '../Widget/separador.dart';
@@ -30,13 +30,13 @@ class MenuPaquetesPage extends StatelessWidget {
                     ),
                   ),
                   const Separador(tamano: 6),
-                  const Textos(
+                  const CustomTextLabels(
                     color: Color.fromRGBO(80, 134, 193, 1),
                     texto: 'Hola Maria',
                     tamano: 28,
                   ),
                   const Separador(tamano: 6),
-                  const Textos(
+                  const CustomTextLabels(
                     texto: 'Aqui puedes encontrar los ajustes de tu cuenta',
                     tamano: 16,
                   ),

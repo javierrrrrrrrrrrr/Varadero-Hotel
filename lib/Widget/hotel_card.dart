@@ -45,7 +45,7 @@ class HotelCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         RaitingBar(
-                          tamano: 19,
+                          tamano: 18,
                           separacion: 0,
                         ),
                         /**  uso es simbolo para lograr que reconozca el simbolo de peso como un caracter */

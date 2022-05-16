@@ -23,14 +23,12 @@ class RegisterPage extends StatelessWidget {
       backgroundColor: khomebodycolor,
       body: SingleChildScrollView(
         child: SizedBox(
-          height: Get.height,
+          height: Get.height * 0.92,
           child: Column(
             children: [
-              const Flexible(
-                child: _PictureHeaderSection(),
-              ),
-              Flexible(
-                flex: 3,
+              const _PictureHeaderSection(),
+              Expanded(
+                flex: 1,
                 child: Container(
                   margin: EdgeInsets.symmetric(
                     horizontal: Get.width * 0.07,
@@ -38,6 +36,7 @@ class RegisterPage extends StatelessWidget {
                   child: Form(
                     key: _formKey,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         InputField(
                           hintext: "Nombre",
@@ -49,7 +48,6 @@ class RegisterPage extends StatelessWidget {
                           icon: const Icon(Icons.person),
                           keyboardType: TextInputType.text,
                         ),
-                        separador(),
                         InputField(
                           hintext: "Nombre de Usuario",
                           validator: (value) =>
@@ -61,7 +59,6 @@ class RegisterPage extends StatelessWidget {
                           icon: const Icon(Icons.person),
                           keyboardType: TextInputType.text,
                         ),
-                        separador(),
                         InputField(
                           hintext: "Contraseña",
                           validator: (value) =>
@@ -72,7 +69,6 @@ class RegisterPage extends StatelessWidget {
                           icon: const Icon(Icons.person),
                           keyboardType: TextInputType.text,
                         ),
-                        separador(),
                         InputField(
                           hintext: "Numero de telefono",
                           validator: (value) =>
@@ -83,7 +79,6 @@ class RegisterPage extends StatelessWidget {
                           icon: const Icon(Icons.person),
                           keyboardType: TextInputType.number,
                         ),
-                        separador(),
                         InputField(
                           hintext: "Email",
                           validator: (value) => validator.emailInput(
@@ -94,34 +89,34 @@ class RegisterPage extends StatelessWidget {
                           icon: const Icon(Icons.person),
                           keyboardType: TextInputType.emailAddress,
                         ),
-                        SizedBox(
-                          height: Get.height * 0.1,
-                        ),
-                        ButtomAcept(
-                          text: "Comenzar",
-                          height: Get.height * 0.07,
-                          width: Get.width,
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              FocusScope.of(context).unfocus();
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return const SpinKitFadingCircle(
-                                      color: Colors.blue,
-                                      size: 50,
-                                    );
-                                  });
-                              bool registered =
-                                  await loginController.registerUser(user);
-                              if (registered) {
-                                Navigator.pop(context);
-                                Get.toNamed('/login');
-                              } else {
-                                Navigator.pop(context);
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: ButtomAcept(
+                            text: "Comenzar",
+                            height: Get.height * 0.07,
+                            width: Get.width,
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                FocusScope.of(context).unfocus();
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return const SpinKitFadingCircle(
+                                        color: Colors.blue,
+                                        size: 50,
+                                      );
+                                    });
+                                bool registered =
+                                    await loginController.registerUser(user);
+                                if (registered) {
+                                  Navigator.pop(context);
+                                  Get.toNamed('/login');
+                                } else {
+                                  Navigator.pop(context);
+                                }
                               }
-                            }
-                          },
+                            },
+                          ),
                         ),
                       ],
                     ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Textos extends StatelessWidget {
-  const Textos({
+class CustomTextLabels extends StatelessWidget {
+  const CustomTextLabels({
     Key? key,
     required this.texto,
     required this.tamano,

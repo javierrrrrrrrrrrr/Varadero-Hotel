@@ -3,15 +3,16 @@ import 'package:varadero/models/users/user.dart';
 import 'package:varadero/services/LoginService.dart';
 
 class LoginController extends GetxController {
-  LoginService? loginController;
+  LoginService? loginservice;
+
   @override
   void onInit() {
     super.onInit();
-    loginController = LoginService();
+    loginservice = LoginService();
   }
 
   Future<bool> registerUser(User user) async {
-    var request = await loginController!.registerUser(user);
+    var request = await loginservice!.registerUser(user);
 
     if (request.statusCode == 200) {
       print(request.body);

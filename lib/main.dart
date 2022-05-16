@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:provider/provider.dart';
-import 'package:varadero/provaiders/loginProvaider.dart';
 import 'package:varadero/screens/comprar_paquetes.dart';
 import 'package:varadero/screens/menu_paquetes.dart';
 import 'package:varadero/screens/home.dart';
@@ -9,15 +7,9 @@ import 'package:varadero/screens/login.dart';
 import 'package:varadero/screens/principal.dart';
 import 'package:varadero/screens/user_register.dart';
 
-void main() => runApp(MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => LoginProvider(),
-          lazy: true,
-        ),
-      ],
-      child: const MyApp(),
-    ));
+void main() => runApp(
+      const MyApp(),
+    );
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
