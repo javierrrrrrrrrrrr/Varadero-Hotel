@@ -10,6 +10,13 @@ const kbuttonAcceptTextColor = Color.fromRGBO(255, 255, 255, 1);
 const kremembermeStyle =
     TextStyle(color: Color.fromRGBO(49, 47, 47, 1), fontSize: 16);
 
+const kChipsTextStyle = TextStyle(
+  color: Color.fromRGBO(87, 85, 85, 1),
+  fontSize: 16,
+);
+
+const kChipBackgroundColor = Colors.white;
+
 const kLoginRegisterText = TextStyle(fontSize: 20, color: Colors.blue);
 
 //input login Style

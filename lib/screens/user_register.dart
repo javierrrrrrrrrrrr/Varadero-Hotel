@@ -5,7 +5,6 @@ import 'package:varadero/contantes/contantes.dart';
 import 'package:varadero/controllers/register_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:varadero/models/users/user.dart';
-import 'package:varadero/utils/validation.dart';
 
 import '../Widget/butomAcept.dart';
 
@@ -16,7 +15,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final registerController = Get.put(RegisterController());
     final _formKey = GlobalKey<FormState>();
-    final validator = CustomValidation();
+
     return Scaffold(
       backgroundColor: khomebodycolor,
       body: SingleChildScrollView(
@@ -41,15 +40,23 @@ class RegisterPage extends StatelessWidget {
                           onChanged: (value) {
                             registerController.name.value = value;
                           },
-                          validator: (value) =>
-                              validator.nullInput(value: value!),
+                          validator: (value) {
+                            bool isNameEmpty = GetUtils.isBlank(value!)!;
+                            return isNameEmpty
+                                ? 'El campo nombre no debe ser nulo'
+                                : null;
+                          },
                           icon: const Icon(Icons.person),
                           keyboardType: TextInputType.text,
                         ),
                         InputField(
                           hintext: "Nombre de Usuario",
-                          validator: (value) =>
-                              validator.nullInput(value: value!),
+                          validator: (value) {
+                            bool isUsername = GetUtils.isUsername(value!);
+                            return isUsername
+                                ? null
+                                : 'Debe entrar un username valido';
+                          },
                           onChanged: (value) {
                             registerController.username.value = value;
                           },
@@ -78,8 +85,16 @@ class RegisterPage extends StatelessWidget {
                                       ),
                             obscureText:
                                 registerController.isPasswordVisible.value,
-                            validator: (value) =>
-                                validator.nullInput(value: value!),
+                            validator: (value) {
+                              bool isBlank = GetUtils.isBlank(value)!;
+                              bool isGraterThan =
+                                  GetUtils.isLengthGreaterThan(value, 6);
+
+                              if (isBlank == true || isGraterThan == false) {
+                                return 'La password es incorrecta';
+                              }
+                              return null;
+                            },
                             onChanged: (value) {
                               registerController.password.value = value;
                             },
@@ -89,8 +104,13 @@ class RegisterPage extends StatelessWidget {
                         ),
                         InputField(
                           hintext: "Numero de telefono",
-                          validator: (value) =>
-                              validator.numberInput(value: value!),
+                          validator: (value) {
+                            bool isValidNumber = GetUtils.isPhoneNumber(value!);
+
+                            return isValidNumber
+                                ? null
+                                : 'Debe retornar un email Valido';
+                          },
                           onChanged: (value) {
                             //Revisar la validacion para el numero de telefono sea solo integer
                             registerController.phoneNumber.value =
@@ -101,8 +121,12 @@ class RegisterPage extends StatelessWidget {
                         ),
                         InputField(
                           hintext: "Email",
-                          // validator: (value) => validator.emailInput(
-                          //     value: value!, text: "Entra un email valido"),
+                          validator: (value) {
+                            bool isValidEmail = GetUtils.isEmail(value!);
+                            return isValidEmail
+                                ? null
+                                : 'Debe retornar un email Valido';
+                          },
                           onChanged: (value) {
                             registerController.email.value = value;
                           },
@@ -155,19 +179,6 @@ class RegisterPage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  // String? nameInput(String value) {
-  //   if (value == null || value.isEmpty) {
-  //     return 'Please enter some text';
-  //   }
-  //   return null;
-  // }
-
-  SizedBox separador() {
-    return SizedBox(
-      height: Get.height * 0.025,
     );
   }
 }

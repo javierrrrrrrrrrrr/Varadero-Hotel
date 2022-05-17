@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:varadero/Widget/textfield.dart';
-import 'package:varadero/screens/principal.dart';
+import 'package:varadero/controllers/login_controller.dart';
 import '../Widget/butomAcept.dart';
 import '../contantes/contantes.dart';
 
@@ -27,48 +29,106 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class LoginBody extends StatelessWidget {
+class LoginBody extends StatefulWidget {
   const LoginBody({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<LoginBody> createState() => _LoginBodyState();
+}
+
+class _LoginBodyState extends State<LoginBody> {
+  final loginController = Get.put(LoginController());
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Get.height * 0.6,
-      margin: EdgeInsets.symmetric(
-        horizontal: Get.width * 0.05,
-      ),
-      child: Column(
-        children: [
-          InputField(
-            onChanged: (value) {},
-            icon: const Icon(Icons.person),
-            hintext: "Usuario",
-            keyboardType: TextInputType.text,
-          ),
-          //Falta Arreglar todos los tamanos de la pagina para que se adapte a los dispositivos
-          SizedBox(
-            height: Get.height * 0.02,
-          ),
-          InputField(
-            onChanged: (value) {},
-            icon: const Icon(Icons.lock_open),
-            hintext: "Contraseña",
-            keyboardType: TextInputType.text,
-          ),
-          const RememberMeSection(),
-          const SizedBox(
-            height: 26,
-          ),
-          const LoginButton(),
-          const SizedBox(
-            height: 93,
-          ),
-          const HasAcountSection()
-        ],
-      ),
-    );
+    //Esta es la key del form
+    final formKey = GlobalKey<FormState>();
+
+    return FutureBuilder<Object>(
+        future: loginController.read(),
+        builder: (context, AsyncSnapshot<Object> snapshot) {
+          if (snapshot.hasData) {
+            return Container(
+              height: Get.height * 0.6,
+              margin: EdgeInsets.symmetric(
+                horizontal: Get.width * 0.05,
+              ),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    InputField(
+                      onChanged: (value) =>
+                          loginController.username.value = value,
+                      validator: (value) {
+                        bool isUsername = GetUtils.isUsername(value!);
+                        return isUsername
+                            ? null
+                            : 'Debe entrar un username valido';
+                      },
+                      icon: const Icon(Icons.person),
+                      hintext: "Usuario",
+                      keyboardType: TextInputType.text,
+                    ),
+                    //Falta Arreglar todos los tamanos de la pagina para que se adapte a los dispositivos
+                    SizedBox(
+                      height: Get.height * 0.02,
+                    ),
+                    Obx(
+                      () => InputField(
+                        initialValue: loginController.remindedPass.value,
+
+                        suffixIcon: loginController.password.value.isEmpty
+                            ? null
+                            : IconButton(
+                                onPressed: () {
+                                  loginController.isPasswordVisible.value =
+                                      !loginController.isPasswordVisible.value;
+                                },
+                                icon: loginController.isPasswordVisible.value
+                                    ? const Icon(Icons.visibility)
+                                    : const Icon(Icons.visibility_off),
+                              ),
+                        obscureText: loginController.isPasswordVisible.value,
+                        icon: const Icon(Icons.lock_open),
+                        hintext: "Contraseña",
+                        keyboardType: TextInputType.text,
+                        onChanged: (value) =>
+                            loginController.password.value = value,
+                        // validator: (value) {
+                        //   bool isBlank = GetUtils.isBlank(value)!;
+                        //   bool isGraterThan = GetUtils.isLengthGreaterThan(value, 6);
+
+                        //   if (isBlank == true || isGraterThan == false) {
+                        //     return 'La password es incorrecta';
+                        //   }
+                        //   return null;
+                        // },
+                      ),
+                    ),
+                    const RememberMeSection(),
+                    const SizedBox(
+                      height: 26,
+                    ),
+                    LoginButton(formKey: formKey),
+                    const SizedBox(
+                      height: 93,
+                    ),
+                    const HasAcountSection()
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        });
   }
 }
 
@@ -100,14 +160,47 @@ class HasAcountSection extends StatelessWidget {
 class LoginButton extends StatelessWidget {
   const LoginButton({
     Key? key,
+    required this.formKey,
   }) : super(key: key);
-
+  final GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
+    final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    final loginController = Get.find<LoginController>();
     return GestureDetector(
       child: const ButtomAcept(text: "Iniciar"),
-      onTap: () {
-        Get.to(const Principal());
+      onTap: () async {
+        final SharedPreferences prefs = await _prefs;
+        if (formKey.currentState!.validate()) {
+          FocusScope.of(context).unfocus();
+          showDialog(
+              context: context,
+              builder: (context) {
+                return const SpinKitFadingCircle(
+                  color: Colors.blue,
+                  size: 50,
+                );
+              });
+          bool seLogueo = await loginController.login(
+            loginController.username.value,
+            loginController.password.value,
+          );
+          if (loginController.isRemeberCheck.value == true) {
+            loginController.remindedPass.value = loginController.password.value;
+            prefs.setString('pass', loginController.password.value);
+            print(prefs.getString('pass'));
+          } else {
+            loginController.remindedPass.value = '';
+            prefs.setString('pass', '');
+          }
+          if (seLogueo) {
+            Navigator.pop(context);
+            Get.toNamed('/home');
+          } else {
+            Navigator.pop(context);
+          }
+          print('El user se logueo: $seLogueo');
+        }
       },
     );
   }
@@ -120,13 +213,16 @@ class RememberMeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginController = Get.find<LoginController>();
     return Row(
       children: [
-        Checkbox(
-          activeColor: Colors.blue,
-          value: true,
-          onChanged: (value) {},
-        ),
+        Obx(() => Checkbox(
+              activeColor: Colors.blue,
+              value: loginController.isRemeberCheck.value,
+              onChanged: (value) {
+                loginController.isRemeberCheck.value = value!;
+              },
+            )),
         const Text('Recuerdame', style: kremembermeStyle),
         Padding(
           padding: EdgeInsets.only(left: Get.width * 0.15),

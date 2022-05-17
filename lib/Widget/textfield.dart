@@ -14,6 +14,7 @@ class InputField extends StatelessWidget {
     this.controller,
     this.obscureText,
     this.suffixIcon,
+    this.initialValue,
   }) : super(key: key);
 
   final void Function(String)? onChanged;
@@ -25,7 +26,7 @@ class InputField extends StatelessWidget {
   final TextEditingController? controller;
   final bool? obscureText;
   final Widget? suffixIcon;
-
+  final String? initialValue;
   @override
   Widget build(BuildContext context) {
     BorderRadius _borderRadius = BorderRadius.all(
@@ -33,6 +34,7 @@ class InputField extends StatelessWidget {
     );
 
     return TextFormField(
+      initialValue: initialValue,
       obscureText: obscureText ?? false,
       controller: controller,
       keyboardType: keyboardType,

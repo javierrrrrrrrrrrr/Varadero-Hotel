@@ -3,8 +3,6 @@ import 'package:varadero/Widget/hotel_card.dart';
 import 'package:varadero/contantes/contantes.dart';
 import '../Widget/appBar.dart';
 
-import '../Widget/custom_pill.dart';
-
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -19,16 +17,55 @@ class HomePage extends StatelessWidget {
             const CustomAppBar(),
             Expanded(
               flex: 1,
-              child: SizedBox(
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: const [
-                      CustomPill(label: 'Precio', width: 60),
-                      CustomPill(label: 'Estrellas', width: 75),
-                      CustomPill(label: 'Cantidad de dias', width: 120),
-                      CustomPill(label: 'Otros', width: 50),
+                      Chip(
+                        side: BorderSide(color: Color.fromRGBO(0, 0, 0, 0.2)),
+                        padding: EdgeInsets.all(8),
+                        label: Text('Precio', style: kChipsTextStyle),
+                        backgroundColor: kChipBackgroundColor,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Chip(
+                        side: BorderSide(color: Color.fromRGBO(0, 0, 0, 0.2)),
+                        padding: EdgeInsets.all(8),
+                        label: Text('Estrellas', style: kChipsTextStyle),
+                        backgroundColor: kChipBackgroundColor,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Chip(
+                        side: BorderSide(color: Color.fromRGBO(0, 0, 0, 0.2)),
+                        padding: EdgeInsets.all(8),
+                        label: Text('Cantidad de dias', style: kChipsTextStyle),
+                        backgroundColor: kChipBackgroundColor,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Chip(
+                        side: BorderSide(color: Color.fromRGBO(0, 0, 0, 0.2)),
+                        padding: EdgeInsets.all(8),
+                        label: Text('Otros', style: kChipsTextStyle),
+                        backgroundColor: kChipBackgroundColor,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Chip(
+                        side: BorderSide(color: Color.fromRGBO(0, 0, 0, 0.2)),
+                        padding: EdgeInsets.all(8),
+                        label: Text('Otros', style: kChipsTextStyle),
+                        backgroundColor: kChipBackgroundColor,
+                      ),
                     ],
                   ),
                 ),
