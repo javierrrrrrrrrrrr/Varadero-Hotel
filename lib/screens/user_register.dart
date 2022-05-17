@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varadero/Widget/textfield.dart';
 import 'package:varadero/contantes/contantes.dart';
-import 'package:varadero/controllers/login_controller.dart';
-import 'package:varadero/models/users/user.dart';
+import 'package:varadero/controllers/register_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:varadero/models/users/user.dart';
 import 'package:varadero/utils/validation.dart';
 
 import '../Widget/butomAcept.dart';
@@ -14,9 +14,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final User user = User();
-
-    final loginController = Get.put(LoginController());
+    final registerController = Get.put(RegisterController());
     final _formKey = GlobalKey<FormState>();
     final validator = CustomValidation();
     return Scaffold(
@@ -41,7 +39,7 @@ class RegisterPage extends StatelessWidget {
                         InputField(
                           hintext: "Nombre",
                           onChanged: (value) {
-                            user.name = value;
+                            registerController.name.value = value;
                           },
                           validator: (value) =>
                               validator.nullInput(value: value!),
@@ -53,38 +51,60 @@ class RegisterPage extends StatelessWidget {
                           validator: (value) =>
                               validator.nullInput(value: value!),
                           onChanged: (value) {
-                            user.username = value;
-                            print(user.username);
+                            registerController.username.value = value;
                           },
                           icon: const Icon(Icons.person),
                           keyboardType: TextInputType.text,
                         ),
-                        InputField(
-                          hintext: "Contraseña",
-                          validator: (value) =>
-                              validator.nullInput(value: value!),
-                          onChanged: (value) {
-                            user.password = value;
-                          },
-                          icon: const Icon(Icons.person),
-                          keyboardType: TextInputType.text,
+                        //Aqui hice aparecer un icono para poder ver las contrasena cuando se toca el boton
+                        //Revisar el codigo del Register Controller de la carpeta controllers..
+                        Obx(
+                          () => InputField(
+                            hintext: "Contraseña",
+                            suffixIcon:
+                                registerController.password.value.isEmpty
+                                    ? null
+                                    : IconButton(
+                                        onPressed: () {
+                                          registerController
+                                                  .isPasswordVisible.value =
+                                              !registerController
+                                                  .isPasswordVisible.value;
+                                        },
+                                        icon: registerController
+                                                .isPasswordVisible.value
+                                            ? const Icon(Icons.visibility)
+                                            : const Icon(Icons.visibility_off),
+                                      ),
+                            obscureText:
+                                registerController.isPasswordVisible.value,
+                            validator: (value) =>
+                                validator.nullInput(value: value!),
+                            onChanged: (value) {
+                              registerController.password.value = value;
+                            },
+                            icon: const Icon(Icons.person),
+                            keyboardType: TextInputType.text,
+                          ),
                         ),
                         InputField(
                           hintext: "Numero de telefono",
                           validator: (value) =>
                               validator.numberInput(value: value!),
                           onChanged: (value) {
-                            user.phoneNumber = value;
+                            //Revisar la validacion para el numero de telefono sea solo integer
+                            registerController.phoneNumber.value =
+                                int.parse(value);
                           },
                           icon: const Icon(Icons.person),
                           keyboardType: TextInputType.number,
                         ),
                         InputField(
                           hintext: "Email",
-                          validator: (value) => validator.emailInput(
-                              value: value!, text: "Entra un email valido"),
+                          // validator: (value) => validator.emailInput(
+                          //     value: value!, text: "Entra un email valido"),
                           onChanged: (value) {
-                            user.email = value;
+                            registerController.email.value = value;
                           },
                           icon: const Icon(Icons.person),
                           keyboardType: TextInputType.emailAddress,
@@ -106,8 +126,16 @@ class RegisterPage extends StatelessWidget {
                                         size: 50,
                                       );
                                     });
+                                User user = User(
+                                  name: registerController.name.value,
+                                  username: registerController.username.value,
+                                  email: registerController.email.value,
+                                  password: registerController.password.value,
+                                  phoneNumber:
+                                      registerController.phoneNumber.value,
+                                );
                                 bool registered =
-                                    await loginController.registerUser(user);
+                                    await registerController.registerUser(user);
                                 if (registered) {
                                   Navigator.pop(context);
                                   Get.toNamed('/login');
