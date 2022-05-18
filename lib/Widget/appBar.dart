@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: 25,
+        top: 15,
         left: 20,
         right: 20,
       ),

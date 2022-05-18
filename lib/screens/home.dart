@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:varadero/Widget/hotel_card.dart';
+import 'package:varadero/Widget/separador.dart';
 import 'package:varadero/contantes/contantes.dart';
 import '../Widget/appBar.dart';
 
@@ -70,6 +72,12 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            const Separador(tamano: 5),
+            Container(
+              height: 1,
+              width: Get.width,
+              color: const Color.fromRGBO(0, 0, 0, 0.2),
             ),
             const Expanded(
               flex: 12,
