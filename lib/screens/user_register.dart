@@ -98,7 +98,7 @@ class RegisterPage extends StatelessWidget {
                             onChanged: (value) {
                               registerController.password.value = value;
                             },
-                            icon: const Icon(Icons.person),
+                            icon: const Icon(Icons.lock_open_rounded),
                             keyboardType: TextInputType.text,
                           ),
                         ),
@@ -116,7 +116,7 @@ class RegisterPage extends StatelessWidget {
                             registerController.phoneNumber.value =
                                 int.parse(value);
                           },
-                          icon: const Icon(Icons.person),
+                          icon: const Icon(Icons.phone),
                           keyboardType: TextInputType.number,
                         ),
                         InputField(
@@ -130,7 +130,7 @@ class RegisterPage extends StatelessWidget {
                           onChanged: (value) {
                             registerController.email.value = value;
                           },
-                          icon: const Icon(Icons.person),
+                          icon: const Icon(Icons.email),
                           keyboardType: TextInputType.emailAddress,
                         ),
                         Padding(
