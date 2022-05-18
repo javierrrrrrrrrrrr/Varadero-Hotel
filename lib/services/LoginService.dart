@@ -17,9 +17,7 @@ class LoginService extends GetConnect {
   }
 
   Future<Response> loginUser(String username, String password) async {
-    return post('http://$kIpApi/api/singin', {
-      "username": username,
-      "password": password,
-    });
+    return post('http://$kIpApi/api/signin',
+        {"username": username, "password": password});
   }
 }

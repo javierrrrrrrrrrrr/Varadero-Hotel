@@ -51,7 +51,7 @@ class _LoginBodyState extends State<LoginBody> {
     final formKey = GlobalKey<FormState>();
 
     return FutureBuilder<Object>(
-        future: loginController.read(),
+        future: loginController.loadSessionSaved(),
         builder: (context, AsyncSnapshot<Object> snapshot) {
           if (snapshot.hasData) {
             return Container(
@@ -64,6 +64,7 @@ class _LoginBodyState extends State<LoginBody> {
                 child: Column(
                   children: [
                     InputField(
+                      initialValue: loginController.username.value,
                       onChanged: (value) =>
                           loginController.username.value = value,
                       validator: (value) {
@@ -181,17 +182,18 @@ class LoginButton extends StatelessWidget {
                   size: 50,
                 );
               });
-          bool seLogueo = await loginController.login(
+          bool seLogueo = await loginController.loginUser(
             loginController.username.value,
             loginController.password.value,
           );
           if (loginController.isRemeberCheck.value == true) {
             loginController.remindedPass.value = loginController.password.value;
             prefs.setString('pass', loginController.password.value);
-            print(prefs.getString('pass'));
+            prefs.setString('username', loginController.username.value);
           } else {
             loginController.remindedPass.value = '';
             prefs.setString('pass', '');
+            prefs.setString('username', '');
           }
           if (seLogueo) {
             Navigator.pop(context);
@@ -213,14 +215,17 @@ class RememberMeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     final loginController = Get.find<LoginController>();
     return Row(
       children: [
         Obx(() => Checkbox(
               activeColor: Colors.blue,
               value: loginController.isRemeberCheck.value,
-              onChanged: (value) {
+              onChanged: (value) async {
+                final SharedPreferences prefs = await _prefs;
                 loginController.isRemeberCheck.value = value!;
+                prefs.setBool('savedSession', value);
               },
             )),
         const Text('Recuerdame', style: kremembermeStyle),

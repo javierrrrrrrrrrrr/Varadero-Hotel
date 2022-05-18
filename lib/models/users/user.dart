@@ -7,7 +7,7 @@ class User {
     required this.name,
     this.phoneNumber,
     required this.email,
-    required this.password,
+    this.password,
     this.createdAt,
     this.updatedAt,
   });
@@ -17,7 +17,7 @@ class User {
   String name;
   int? phoneNumber;
   String email;
-  String password;
+  String? password;
   DateTime? createdAt;
   DateTime? updatedAt;
 
