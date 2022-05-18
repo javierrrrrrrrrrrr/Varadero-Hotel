@@ -197,7 +197,7 @@ class LoginButton extends StatelessWidget {
           }
           if (seLogueo) {
             Navigator.pop(context);
-            Get.toNamed('/home');
+            Get.toNamed('/principal');
           } else {
             Navigator.pop(context);
           }
